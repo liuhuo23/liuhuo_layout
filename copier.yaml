@@ -1,3 +1,5 @@
+jinja_extensions:
+  - .mod  # 添加 .mod 扩展名到处理列表
 # 用户输入参数
 project_name:
   type: str
