@@ -1,7 +1,3 @@
-# 模板元数据
-_template_version: "1.0"
-_subdirectory: "template"
-
 # 用户输入参数
 project_name:
   type: str
@@ -12,8 +8,3 @@ module_path:
   type: str
   help: "Go模块路径 (例如: liuhuo23/{{project_name}})"
   default: liuhuo23/{{project_name}}
-
-# 文件处理规则
-_exclude:
-  - "*.swp"
-  - "*.tmp"
