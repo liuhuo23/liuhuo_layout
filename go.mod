@@ -1,4 +1,4 @@
-module {{cookiecutter.project_name}}
+module {{copier.project_name}}
 
 go 1.23.4
 
