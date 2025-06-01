@@ -10,8 +10,8 @@ project_name:
 
 module_path:
   type: str
-  help: "请输入Go模块路径"
-  default: "github.com/username/projectname"
+  help: Go模块路径 (例如: liuhuo23/{{project_name}})
+  default: liuhuo23/{{project_name}}
 
 # 文件处理规则
 _exclude:
