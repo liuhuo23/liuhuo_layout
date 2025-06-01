@@ -1,4 +1,4 @@
-module {{copier.project_name}}
+module {{project_name}}
 
 go 1.23.4
 
