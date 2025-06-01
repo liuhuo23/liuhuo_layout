@@ -1,24 +1,24 @@
 package data
 
 import (
-	"fmt"
+	"github.com/go-kratos/kratos-layout/internal/conf"
 
-	config "{{cookiecutter.project_name}}/internal/conf"
-
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/google/wire"
 )
 
-func NewDb(data *config.DatabaseConfig) *gorm.DB {
-	dsn := fmt.Sprintf(
-		"%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-		data.Username,
-		data.Password,
-		data.Host, data.Port, data.DbName,
-	)
-	sqlDB, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		panic(err)
+// ProviderSet is data providers.
+var ProviderSet = wire.NewSet(NewData, NewGreeterRepo)
+
+// Data .
+type Data struct {
+	// TODO wrapped database client
+}
+
+// NewData .
+func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
+	cleanup := func() {
+		log.NewHelper(logger).Info("closing the data resources")
 	}
-	return sqlDB
+	return &Data{}, cleanup, nil
 }
