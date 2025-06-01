@@ -1,0 +1,25 @@
+name: "liuos"
+version: "1.0.0"
+environment: "development"
+port: 8080
+log_level: "info"
+# 密钥配置文件
+secrets:
+  # 从外部文件引入密钥
+  file: "./secrets.yaml"
+  # 或者直接在这里定义敏感信息
+  # api_key: "your_api_key_here"
+  # jwt_secret: "your_jwt_secret_here"
+
+database:
+  driver: "mysql"
+  host: "127.0.0.1"
+  port: 13306
+  username: "root"
+  password: $(secrets.database.password)
+  db_name: "liuos"
+
+redis:
+  host: "127.0.0.1"
+  port: 16379
+  password: ${secrets.redis.password}

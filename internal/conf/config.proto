@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package config;
+
+option go_package = "liuos/config";
+
+message AppConfig {
+  string name = 1;
+  string version = 2;
+  string environment = 3;
+  int32 port = 4;
+  DatabaseConfig database = 5;
+  RedisConfig redis = 6;
+  string log_level = 7;
+  string host = 8;
+}
+
+message DatabaseConfig {
+  string driver = 1;
+  string host = 2;
+  int32 port = 3;
+  string username = 4;
+  string password = 5;
+  string db_name = 6;
+}
+
+
+message RedisConfig {
+  string host = 1;
+  int32 port = 2;
+  string password = 3;
+}
