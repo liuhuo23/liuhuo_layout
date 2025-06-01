@@ -1,0 +1,19 @@
+# 模板元数据
+_template_version: "1.0"
+_subdirectory: "template"
+
+# 用户输入参数
+project_name:
+  type: str
+  help: "请输入项目名称"
+  default: "my_project"
+
+module_path:
+  type: str
+  help: "请输入Go模块路径"
+  default: "github.com/username/projectname"
+
+# 文件处理规则
+_exclude:
+  - "*.swp"
+  - "*.tmp"
