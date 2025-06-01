@@ -2,7 +2,8 @@ package data
 
 import (
 	"fmt"
-	config "liuhuo23/liuos/internal/conf"
+
+	config "{{cookiecutter.project_name}}/internal/conf"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

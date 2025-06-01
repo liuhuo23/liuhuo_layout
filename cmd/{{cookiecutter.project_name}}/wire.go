@@ -4,9 +4,9 @@
 package main
 
 import (
-	"liuhuo23/liuos/internal/app"
-	"liuhuo23/liuos/internal/data"
-	"liuhuo23/liuos/internal/server"
+	"liuhuo23/{{cookiecutter.project_name}}/internal/app"
+	"liuhuo23/{{cookiecutter.project_name}}/internal/data"
+	"liuhuo23/{{cookiecutter.project_name}}/internal/server"
 
 	"github.com/google/wire"
 )

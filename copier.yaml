@@ -1,0 +1,13 @@
+# copier.yaml
+project_name:
+  type: str
+  help: 项目名称
+  default: my-project
+description:
+  type: str
+  help: 项目描述
+  default: A Go project
+author:
+  type: str
+  help: 作者姓名
+  default: Your Name

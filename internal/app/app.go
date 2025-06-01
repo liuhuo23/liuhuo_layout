@@ -2,8 +2,9 @@ package app
 
 import (
 	"fmt"
-	config "liuhuo23/liuos/internal/conf"
 	"os"
+
+	config "{{cookiecutter.project_name}}/internal/conf"
 
 	"github.com/labstack/echo/v4"
 	"gopkg.in/yaml.v3"

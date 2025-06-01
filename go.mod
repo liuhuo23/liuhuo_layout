@@ -1,4 +1,4 @@
-module liuhuo23/liuos
+module {{cookiecutter.project_name}}
 
 go 1.23.4
 

@@ -45,18 +45,18 @@ init:
 .PHONY: wire
 wire:
 	@echo "Generating wire code..."
-	cd ./cmd/liuos && wire
+	cd ./cmd/{{cookiecutter.project_name}} && wire
 
 
 .PHONY: run
 run:
 	@echo "Running project..."
-	go run ./cmd/liuos
+	go run ./cmd/{{cookiecutter.project_name}}
 
 .PHONY: build
 build:
 	@echo "Building project..."
-	wire gen ./cmd/liuos && go build -o ./bin ./...  
+	wire gen ./cmd/{{cookiecutter.project_name}} && go build -o ./bin ./...  
 
 
 .PHONY: api
