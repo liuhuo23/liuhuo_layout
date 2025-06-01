@@ -1,4 +1,4 @@
-module liuhuo23/liuhuo_layout
+module {{cookiecutter.module_path}} 
 
 go 1.23.4
 
