@@ -32,3 +32,22 @@
     └── .gitkeep            
 ```
 
+# 安装不要文件
+```shell
+make init
+```
+
+# 编译
+```shell
+make build
+```
+# 运行
+```shell
+make run
+```
+# 按照 proto 生成客户端文件
+规则：
+`./api/[应用 名称]/v1/[服务名称].proto`
+```shell
+make client name=[应用名称]
+```
