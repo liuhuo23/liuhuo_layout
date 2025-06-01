@@ -47,7 +47,7 @@ build:
 .PHONY: run
 # run
 run:
-	go run -ldflags "-X main.Version=$(VERSION)" ./cmd/{{cookiecutter.project_name}}
+	kratos run 
 
 .PHONY: generate
 # generate
