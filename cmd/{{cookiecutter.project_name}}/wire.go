@@ -1,22 +1,22 @@
 //go:build wireinject
 // +build wireinject
 
+// The build tag makes sure the stub is not built in the final build.
+
 package main
 
 import (
-	"liuhuo23/{{cookiecutter.project_name}}/internal/app"
-	"liuhuo23/{{cookiecutter.project_name}}/internal/data"
-	"liuhuo23/{{cookiecutter.project_name}}/internal/server"
+	"github.com/go-kratos/kratos-layout/internal/data"
+	"github.com/go-kratos/kratos-layout/internal/server"
+	"github.com/go-kratos/kratos-layout/internal/service"
+	"github.com/{{cookiecutter.project_name}}/internal/conf"
 
+	"github.com/go-kratos/kratos/v2"
+	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
 )
 
-func InitializeApp() *app.App {
-	panic(wire.Build(
-		app.NewAppConfig,
-		app.NewDatabaseConfig,
-		server.NewEcho,
-		data.NewDb,
-		app.NewApp,
-	))
+// wireApp init kratos application.
+func wireApp(*conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) {
+	panic(wire.Build(server.ProviderSet, data.ProviderSet, service.ProviderSet, newApp))
 }
