@@ -85,19 +85,11 @@ client:
 	go mod tidy
 
 
-
-	
-
-.PHONY: generate
-# generate
-generate:
-	go generate ./...
-	go mod tidy
-
-
-.PHONY: all
-all:
-	make config
-	make wire
-	make build
-
+.PHONY: template
+template:
+	@if [ ! -d "api/$(name)/v1" ]; then \
+		mkdir -p api/$(name)/v1; \
+		sed 's/#{name}/$(name)/g' api.proto.template > api/$(name)/v1/$(name).proto; \
+	else \
+		echo "Directory api/$(name)/v1 already exists, skip creation"; \
+	fi
