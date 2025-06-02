@@ -1,0 +1,19 @@
+syntax = "proto3";
+package health.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/liuhuo23/liuhuo_layout/api/health/v1;v1";
+
+service healthSvc {
+  rpc CheckHealth (google.protobuf.Empty) returns (HelloReply) {
+    option (google.api.http) = {
+      get: "/health"
+    };
+  }
+}
+
+message HelloReply {
+  string ok = 1;
+}

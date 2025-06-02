@@ -1,9 +1,9 @@
 package server
 
 import (
-	v1 "github.com/go-kratos/kratos-layout/api/helloworld/v1"
-	"github.com/go-kratos/kratos-layout/internal/conf"
-	"github.com/go-kratos/kratos-layout/internal/service"
+	health_v1 "liuhuo23/liuos/api/health/v1"
+	"liuhuo23/liuos/internal/conf"
+	"liuhuo23/liuos/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
@@ -11,7 +11,12 @@ import (
 )
 
 // NewHTTPServer new an HTTP server.
-func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.Logger) *http.Server {
+func NewHTTPServer(
+	c *conf.Server,
+	logger log.Logger,
+	health *service.HealthSrv,
+	openapi *service.OpenapiService,
+) *http.Server {
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
@@ -27,6 +32,7 @@ func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.L
 		opts = append(opts, http.Timeout(c.Http.Timeout.AsDuration()))
 	}
 	srv := http.NewServer(opts...)
-	v1.RegisterGreeterHTTPServer(srv, greeter)
+	health_v1.RegisterHealthSvcHTTPServer(srv, health)
+	srv.Route("/").GET("/openapi.yaml", openapi.DownloadFile)
 	return srv
 }

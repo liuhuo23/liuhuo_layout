@@ -43,6 +43,14 @@ api:
 build:
 	mkdir -p bin/ && go build -ldflags "-X main.Version=$(VERSION)" -o ./bin/ ./...
 
+.PHONY: wire
+# wire
+wire:
+	@echo "Generating wire code..."
+	if ls cmd/liuos/wire_gen.go >/dev/null 2>&1; then \
+	  rm -f cmd/liuos/wire_gen.go; \
+	fi
+	cd ./cmd/liuos && wire
 
 .PHONY: run
 # run
@@ -54,6 +62,9 @@ run:
 generate:
 	go generate ./...
 	go mod tidy
+
+
+
 .PHONY: client
 # generate client code
 client:
@@ -62,14 +73,16 @@ client:
 	  rm -f api/${name}/v1/*.go; \
 	fi
 	protoc --proto_path=./api \
-	      --proto_path=./third_party \
-	      --go_out=paths=source_relative:./api \
-		  --go-http_out=paths=source_relative:./api \
-	      api/${name}/v1/*.proto
+       --proto_path=./third_party \
+       --go_out=paths=source_relative:./api \
+ 	  --go-http_out=paths=source_relative:./api \
+	  --go-grpc_out=paths=source_relative:./api \
+       api/${name}/v1/*.proto
 	go mod tidy
 
 
 .PHONY: template
+# create template
 template:
 	@if [ ! -d "api/$(name)/v1" ]; then \
 		mkdir -p api/$(name)/v1; \
@@ -77,6 +90,7 @@ template:
 	else \
 		echo "Directory api/$(name)/v1 already exists, skip creation"; \
 	fi
+
 
 
 .PHONY: config
@@ -91,6 +105,16 @@ config:
 		--proto_path=./third_party \
 		--go_out=paths=source_relative:./internal \
 		$(INTERNAL_PROTO_FILES)
+
+
+.PHONY: service
+# generate service proto
+service:
+	@echo "Generating service code..."
+	# if ls internal/service/*.pb.go >/dev/null 2>&1; then \
+	#   rm -f internal/service/*.pb.go; \
+	kratos proto server api/$(name)/v1/$(name).proto -t internal/service
+
 
 .PHONY: all
 # generate all
